@@ -1,0 +1,8 @@
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS db;
+    CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'heslo';
+    CREATE USER IF NOT EXISTS 'developer'@'%' IDENTIFIED BY 'heslo';
+    GRANT ALL PRIVILEGES ON db.* TO 'app_user'@'%';
+    GRANT SELECT ON db.* TO 'developer'@'%';
+    FLUSH PRIVILEGES;

@@ -16,23 +16,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: nevimkamouz/custom-mariadb:latest
-          env:
-            - name: MARIADB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mariadb-secret
-                  key: mariadb-root-password
-            - name: MARIADB_APP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mariadb-secret
-                  key: mariadb-app-password
-            - name: MARIADB_DEVELOPER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mariadb-secret
-                  key: mariadb-developer-password
+          image: mariadb:latest
           ports:
             - containerPort: 3306
           volumeMounts:
