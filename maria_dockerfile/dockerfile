@@ -25,5 +25,5 @@ RUN echo "init.sql generated successfully: " && cat init.sql
 EXPOSE 3306
 
 # Use the MariaDB default entrypoint
-CMD ["mysqld"]
+CMD ["mariadbd"]
 
