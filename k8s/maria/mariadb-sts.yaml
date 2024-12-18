@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mariadb
   namespace: app
 spec:
+  serviceName: mariadb
   replicas: 1
   selector:
     matchLabels:
@@ -35,9 +36,22 @@ spec:
           ports:
             - containerPort: 3306
           volumeMounts:
+            - name: mariadb-storage
+              mountPath: /var/lib/mysql
             - name: mariadb-init
               mountPath: /docker-entrypoint-initdb.d
       volumes:
         - name: mariadb-init
           configMap:
             name: mariadb-init-script
+  volumeClaimTemplates:
+    - metadata:
+        name: mariadb-storage
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 10Gi
+
