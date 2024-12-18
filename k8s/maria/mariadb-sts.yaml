@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -17,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mariadb
-          image: mariadb:latest
+          image: nevimkamouz/custom-mariadb:latest
           env:
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
