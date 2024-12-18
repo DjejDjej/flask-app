@@ -33,15 +33,25 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: mariadb-developer-password
-          ports:
-            - containerPort: 3306
+          command:
+            - sh
+            - -c
+            - |
+              chmod +x /scripts/generate-init-sql.sh
+              /scripts/generate-init-sql.sh
+              exec docker-entrypoint.sh mysqld
           volumeMounts:
             - name: mariadb-storage
               mountPath: /var/lib/mysql
             - name: mariadb-init
               mountPath: /docker-entrypoint-initdb.d
+            - name: script-volume
+              mountPath: /scripts
       volumes:
         - name: mariadb-init
+          configMap:
+            name: mariadb-init-script
+        - name: script-volume
           configMap:
             name: mariadb-init-script
   volumeClaimTemplates:

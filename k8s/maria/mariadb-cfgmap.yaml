@@ -4,10 +4,21 @@ metadata:
   name: mariadb-init-script
   namespace: app
 data:
-  init.sql: |
+  generate-init-sql.sh: |
+    #!/bin/sh
+    set -e
+
+    # Path to output SQL file
+    INIT_SQL="/docker-entrypoint-initdb.d/init.sql"
+
+    # Create the init.sql file
+    cat <<EOF > "$INIT_SQL"
     CREATE DATABASE IF NOT EXISTS db;
     CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY '${MARIADB_APP_PASSWORD}';
     CREATE USER IF NOT EXISTS 'developer'@'%' IDENTIFIED BY '${MARIADB_DEVELOPER_PASSWORD}';
     GRANT ALL PRIVILEGES ON db.* TO 'app_user'@'%';
     GRANT SELECT ON db.* TO 'developer'@'%';
     FLUSH PRIVILEGES;
+    EOF
+
+    echo "init.sql generated successfully at $INIT_SQL"
