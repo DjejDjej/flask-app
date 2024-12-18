@@ -6,14 +6,8 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS db;
-    CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'heslo';
-    CREATE USER IF NOT EXISTS 'developer'@'%' IDENTIFIED BY 'heslo';
+    CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY '${MARIADB_APP_PASSWORD}';
+    CREATE USER IF NOT EXISTS 'developer'@'%' IDENTIFIED BY '${MARIADB_DEVELOPER_PASSWORD}';
     GRANT ALL PRIVILEGES ON db.* TO 'app_user'@'%';
     GRANT SELECT ON db.* TO 'developer'@'%';
     FLUSH PRIVILEGES;
-
-    -- Create the palindrom table
-    CREATE TABLE IF NOT EXISTS palindrom (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      text VARCHAR(200) NOT NULL
-    );
