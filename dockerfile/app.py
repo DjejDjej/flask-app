@@ -10,15 +10,28 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 context = {'start_time': datetime.now()}
 
+
 app_host = getenv('APP_HOST', '0.0.0.0')
 app_port = int(getenv('APP_PORT', 5000))
+
+# Redis settings
 redis_host = getenv('REDIS_HOST', 'redis')
 redis_port = int(getenv('REDIS_PORT', 6379))
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://user:password@host:3306/db_name'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://user:password@host:5432/db_name'
-connection_string = getenv('DATABASE_URI', 'sqlite:////tmp/test.db')
-print('Conecting to DB', connection_string)
+
+# Database settings
+db_user = getenv('DB_USER', 'app_user')
+db_password = getenv('DB_PASSWORD', 'password')
+db_host = getenv('DB_HOST', 'localhost')
+db_name = getenv('DB_NAME', 'db')
+
+# Construct DATABASE_URI
+connection_string = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:3306/{db_name}"
+print('Connecting to DB:', connection_string)
+
+# Flask SQLAlchemy configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
+
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
 db = SQLAlchemy(app)
