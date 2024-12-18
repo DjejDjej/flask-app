@@ -41,6 +41,8 @@ class Palindrom(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(200), nullable=False)
 
+with app.app_context():
+    db.create_all()
 
 def is_ready():
     return datetime.now() > context['start_time'] + timedelta(seconds=10)

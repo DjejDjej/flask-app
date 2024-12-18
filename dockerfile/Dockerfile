@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 # Set working directory in the container
 WORKDIR /app
 
-# Install system dependencies
+# Install dependencies
 RUN apk update && apk add --no-cache \
     build-base \
     mariadb-connector-c-dev \
@@ -26,9 +26,9 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r re
 # Copy the application files
 COPY . /app
 
-# Run create_db.py to set up the database before starting the app
-CMD ["python", "create_db.py", "&&", "python", "app.py"]
-
 # Expose the application port
 EXPOSE 5000
+
+# Run the application
+CMD ["python", "app.py"]
 
