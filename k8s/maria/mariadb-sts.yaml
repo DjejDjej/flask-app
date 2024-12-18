@@ -37,8 +37,7 @@ spec:
             - sh
             - -c
             - |
-              chmod +x /scripts/generate-init-sql.sh
-              /scripts/generate-init-sql.sh
+              sh /scripts/generate-init-sql.sh
               exec docker-entrypoint.sh mysqld
           volumeMounts:
             - name: mariadb-storage
