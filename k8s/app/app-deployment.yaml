@@ -40,5 +40,17 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: mariadb-app-password
-            - name: DATABASE_URI
-              value: "mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@mariadb-0.mariadb.app.svc.cluster.local:3306/db"
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
