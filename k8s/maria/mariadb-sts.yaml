@@ -1,3 +1,4 @@
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -33,24 +34,15 @@ spec:
                 secretKeyRef:
                   name: mariadb-secret
                   key: mariadb-developer-password
-          command:
-            - sh
-            - -c
-            - |
-              sh /scripts/generate-init-sql.sh
-              exec docker-entrypoint.sh mysqld
+          ports:
+            - containerPort: 3306
           volumeMounts:
             - name: mariadb-storage
               mountPath: /var/lib/mysql
             - name: mariadb-init
               mountPath: /docker-entrypoint-initdb.d
-            - name: script-volume
-              mountPath: /scripts
       volumes:
         - name: mariadb-init
-          configMap:
-            name: mariadb-init-script
-        - name: script-volume
           configMap:
             name: mariadb-init-script
   volumeClaimTemplates:
