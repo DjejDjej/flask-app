@@ -5,6 +5,4 @@ nodes:
     image: kindest/node:v1.31.4
   - role: worker
     image: kindest/node:v1.31.4
-  - role: worker
-    image: kindest/node:v1.31.4
 
