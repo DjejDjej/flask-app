@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-app
-  namespace: app 
+  namespace: app
 spec:
   replicas: 2
   selector:
@@ -14,10 +14,23 @@ spec:
         app: flask-app
     spec:
       containers:
-      - name: flask-app
-        image: nevimkamouz/flask-app:latest 
-        ports:
-        - containerPort: 5000
-        env:
-        - name: FLASK_ENV
-          value: "production"
+        - name: flask-app
+          image: nevimkamouz/flask-app:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              value: "production"
+            - name: APP_HOST
+              value: "0.0.0.0"
+            - name: APP_PORT
+              value: "5000"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: DATABASE_URI
+              value: "mysql+pymysql://app_user:${DB_PASSWORD}@mariadb-0.mariadb.app.svc.cluster.local:3306/db"
+          envFrom:
+            - secretRef:
+                name: mariadb-secret
