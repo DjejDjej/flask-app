@@ -41,4 +41,4 @@ spec:
             - name: DB_NAME
               value: "db"
             - name: DATABASE_URI
-              value: "mysql+pymysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:3306/${DB_NAME}"
+              value: "mysql+pymysql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):3306/$(DB_NAME)"
