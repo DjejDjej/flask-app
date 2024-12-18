@@ -29,6 +29,8 @@ spec:
               value: "redis"
             - name: REDIS_PORT
               value: "6379"
+            - name: DB_HOST
+              value: mariadb-0.mariadb.app.svc.cluster.local
             - name: DB_USER
               value: "app_user"
             - name: DB_PASSWORD
