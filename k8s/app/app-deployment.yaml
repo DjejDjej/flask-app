@@ -30,7 +30,4 @@ spec:
             - name: REDIS_PORT
               value: "6379"
             - name: DATABASE_URI
-              value: "mysql+pymysql://app_user:${DB_PASSWORD}@mariadb-0.mariadb.app.svc.cluster.local:3306/db"
-          envFrom:
-            - secretRef:
-                name: mariadb-secret
+              value: "mysql+pymysql://app_user:hello@mariadb-0.mariadb.app.svc.cluster.local:3306/db"
