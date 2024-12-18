@@ -11,6 +11,12 @@ data:
     # Path to output SQL file
     INIT_SQL="/docker-entrypoint-initdb.d/init.sql"
 
+    # Ensure required environment variables are set
+    if [ -z "${MARIADB_APP_PASSWORD}" ] || [ -z "${MARIADB_DEVELOPER_PASSWORD}" ]; then
+      echo "Error: Required environment variables are not set."
+      exit 1
+    fi
+
     # Create the init.sql file
     cat <<EOF > "$INIT_SQL"
     CREATE DATABASE IF NOT EXISTS db;
