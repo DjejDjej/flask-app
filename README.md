@@ -1,3 +1,41 @@
+# Install Docker on Linux
+
+## Prerequisites
+Ensure your system is up to date:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+## Install Docker
+1. Install necessary packages:
+   ```bash
+   sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+   ```
+2. Add Docker's GPG key:
+   ```bash
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   ```
+3. Add the Docker repository:
+   ```bash
+   echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
+4. Install Docker:
+   ```bash
+   sudo apt update
+   sudo apt install docker-ce docker-ce-cli containerd.io -y
+   ```
+5. Verify Docker installation:
+   ```bash
+   docker --version
+   ```
+6. (Optional) Add your user to the `docker` group to run Docker without `sudo`:
+   ```bash
+   sudo usermod -aG docker $USER
+   ```
+   **Log out and log back in for this to take effect.**
+
+---
+
 # Install kind (Kubernetes IN Docker) on Linux
 
 ## Prerequisites
@@ -45,3 +83,8 @@
 cd k8s
 ./deploy.sh
 ```
+
+Run forward to make it accessible outside (workaround due to kind networking being weird):
+```bash
+./forward &
+
