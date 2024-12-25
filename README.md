@@ -86,5 +86,5 @@ cd k8s
 
 Run forward to make it accessible outside (workaround due to kind networking being weird):
 ```bash
-./forward &
+nohup ./forward.sh > /dev/null 2>&1 &
 ```
