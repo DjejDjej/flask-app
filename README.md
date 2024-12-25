@@ -78,7 +78,7 @@ sudo apt update && sudo apt upgrade -y
   kubectl version --client
   ```
 
-## Install the flask app
+## Deploy the flask app
 ```bash
 cd k8s
 ./deploy.sh
