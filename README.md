@@ -87,4 +87,4 @@ cd k8s
 Run forward to make it accessible outside (workaround due to kind networking being weird):
 ```bash
 ./forward &
-
+```
