@@ -40,8 +40,8 @@
   kubectl version --client
   ```
 
-## Create a Cluster
+## Install the flask app
 ```bash
-kind create cluster
+cd k8s
+./deploy.sh
 ```
-
