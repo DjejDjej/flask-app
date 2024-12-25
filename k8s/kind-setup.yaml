@@ -1,0 +1,17 @@
+# cluster.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.31.4
+    extraPortMappings:
+      - containerPort: 80   # In-cluster port
+        hostPort: 80       # Host port
+        protocol: TCP
+      - containerPort: 443  # In-cluster port
+        hostPort: 443      # Host port
+        protocol: TCP
+
+  - role: worker
+    image: kindest/node:v1.31.4
+

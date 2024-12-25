@@ -4,11 +4,14 @@ metadata:
   name: nginx-service
   namespace: app
 spec:
-  type: NodePort
+  type: NodePort  # Change this to NodePort
   selector:
     app: nginx
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
-    - port: 443
+    - name: https
+      port: 443
       targetPort: 443
+
