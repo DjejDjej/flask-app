@@ -88,3 +88,6 @@ Run forward to make it accessible outside (workaround due to kind networking bei
 ```bash
 nohup ./forward.sh > /dev/null 2>&1 &
 ```
+
+Login to admin area is admin admin.
+
